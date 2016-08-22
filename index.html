@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>BOC Assignment</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/libs/oj/v2.0.2/alta/oj-alta-min.css" rel="stylesheet" type="text/css"/>
+        <!-- RequireJS configuration file -->
+        <script data-main="js/main" src="js/libs/require/require.js"></script>
+    </head>
+    <body>
+        <h1>Please enter employee data</h1>      
+        <div id="globalBody" >
+            <div role="main" class="demo-page-content-area" >
+                <div id ="left"  style="float:left; width:50%;">
+                    <div>
+                        <br/><br/>
+                        <label for="firstName">First Name </label>
+                        <input id="firstName" required="firstName"   data-bind="ojComponent: {component: 'ojInputText',
+                                    value: firstName,
+                                    validators: [{type: 'regExp', options: {
+                                            pattern: '[a-zA-Z]{1,}'}}]}">
+                    </div>                 
+                    <br/>
+
+                    <div>
+                        <label for="lastName">Last Name</label>
+                        <input id="lastName" required="lastName" data-bind="ojComponent: {component: 'ojInputText',
+                                value: lastName,
+                                validators: [{type: 'regExp', options: {
+                                pattern: '[a-zA-Z]{1,}'}}]}">
+                    </div>
+                    <br/>
+                    <br/>
+                    <label id="empGender">Gender</label>
+                    <div id="gender" aria-labelledby="empGender"
+                         data-bind="ojComponent: {
+                            component: 'ojRadioset', 
+                            value: gender,
+                            required: isRequired}" >
+                        <span class="oj-choice-col">
+                            <input id="Male" type="radio" name="gender" value="Male">
+                            <label for="Male">Male</label>
+                        </span>
+                        <span class="oj-choice-col">
+                            <input id="female" type="radio" name="gender" value="Female">
+                            <label for="female">Female</label>
+                        </span>      
+                    </div>    
+                    <br/>
+                    <br/>
+                    <label for="age">Age</label> 
+                    <input id="age"
+                           data-bind="ojComponent: {
+                    component: 'ojInputNumber',
+                    max: max,
+                    min: min, 
+                    value: ageValue,
+                    required: isRequired}"/>
+                    <br/>
+                    <br/>
+                    <label for="salary">Yearly Income</label>
+                    <select id="salary" data-bind="ojComponent: {component: 'ojSelect',
+                                    value: salary,
+                                    required: isRequired,
+                                    rootAttributes: {style:'max-width:20em'}}">
+                        <option value="sal0">0 - 3 Lakhs</option>
+                        <option value="sal8">3 - 8 Lakhs</option>
+                        <option value="sal15">8 - 15 Lakhs</option>
+                        <option value="sal30">15 - 30 Lakhs</option>
+                        <option value="salAbove">Above 30 Lakhs</option>
+                    </select>
+                    <br/><br/>
+                    <label for="addLine1" >Address Line1</label>
+                    <input id="addLine1" data-bind="ojComponent: {
+                    component: 'ojInputText', 
+                    value:addLine1,
+                    required: isRequired
+                   }">
+
+                    <label for="addLine2" >Address Line2</label>
+                    <input id="addLine2" data-bind="ojComponent: {
+                    component: 'ojInputText', 
+                    value:addLine2
+                   }">
+
+                    <label for="city" >City</label>
+                    <input id="city" data-bind="ojComponent: {
+                    component: 'ojInputText', 
+                    value:city,
+                    required: isRequired
+                   }">
+
+                    <label for="state" >State</label>
+                    <input id="state" data-bind="ojComponent: {
+                    component: 'ojInputText', 
+                    value:state,
+                    required: isRequired
+                   }"> <br/>
+                    <br/>
+                    <br/>
+                    <label for="email" >Email</label>
+                    <input id="email" data-bind="ojComponent: {component: 'ojInputText',
+                                value: email,
+                                validators: [{type: 'regExp', options: {
+                                pattern: '[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}'}}]}"/>
+                    <br/> <br/>
+
+                    <label id="subscribeLabel" for="subscribe">Subscribe to newsletter </label>
+                    <input id="subscribe" data-bind="ojComponent: {component: 'ojSwitch', value: isSubscribe}" /><br/><br/>
+                    <span> Subscribe to newsletter is  </span><span data-bind="text: ((isSubscribe()) ? 'YES' : 'NO')"></span>
+                    <br/> <br/>
+
+                    <form data-bind="submit: addTask">
+                        <input id= "button" type="submit"
+                               data-bind=" 
+                       ojComponent: { component: 'ojButton', label: 'Submit' }" />
+
+                    </form>
+
+                    <ul data-bind="foreach: employees">
+                        <li>
+                            <span>First Name is: </span>
+                            <span data-bind="text: fName"></span>
+                        </li>
+                        <li>
+                            <span>Last Name is: </span>
+                            <span data-bind="text: lName"></span>
+                        </li>
+                        <li>
+                            <span>Age is: </span>
+                            <span data-bind="text: ageEmp"></span>
+                        </li>
+                        <li>
+                            <span>Gender is: </span>
+                            <span data-bind="text: genderEmp"></span>
+                        </li>
+                        <li>
+                            <span>Salary is: </span>
+                            <span data-bind="text: salEmp.valueOf()"></span>
+                        </li>
+                        <li>
+                            <span>Address is: </span>
+                            <span data-bind="text: addLine1Emp"></span>,           
+                            <span data-bind="text: addLine2Emp"></span>,
+                            <span data-bind="text: cityEmp"></span>,
+                            <span data-bind="text: stateEmp"></span>
+                        </li>
+                        <li>
+                            <span>Email ID is: </span>
+                            <span data-bind="text: emailEmp"></span>
+                        </li>
+                        <li>
+                            <span>Subscribe to Newsletter : </span>
+                            <span data-bind="text: isSubscribeEmp"></span>
+                        </li>  
+                        <li>
+                        <span>-----------------------</span>
+                        </li>
+                    </ul>
+                </div>
+                <h1>Pie-Chart for Gender</h1>
+                <div id="right" style="float:right; width:50%;"> 
+                    <div id="pieChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'pie', 
+            series: pieSeriesValue,
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            hoverBehavior: 'dim'
+        }"
+                         style="max-width:500px;width:100%;height:350px;">
+                    </div> 
+                    <h1>Bar-Chart for Age</h1>
+                    <div id="barChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'bar', 
+            orientation: 'vertical',
+            xAxis: {title: 'Age'},
+            yAxis: {title: 'Count'},
+            series: barSeriesValue,
+            groups: barGroupsValue, 
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            hoverBehavior: 'dim'
+        }"
+                         style="max-width:500px;width:100%;height:350px;">
+                    </div>
+                    <h1>Donut-Chart for Annual Income</h1>
+                    <div id="donut"  data-bind="ojComponent: {
+        component: 'ojChart',
+        type: 'pie',
+        series: donutSeriesValue,
+        groups: donutGroupsValue,
+        styleDefaults: {pieInnerRadius: ko.toJS(innerRadius)},
+        animationOnDataChange: 'auto',
+        pieCenter: {
+          label: ko.toJS(centerLabel),
+          labelStyle: ko.toJS(labelStyle)}
+        }"
+                         style="max-width:500px;width:100%;height:350px;">
+                    </div>
+                </div>        
+            </div>     
+        </div>       
+    </body>    
+</html>
